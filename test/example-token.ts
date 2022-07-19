@@ -4,16 +4,16 @@ import {
 	takeSnapshot,
 	SnapshotRestorer,
 } from '@nomicfoundation/hardhat-network-helpers'
-import { ExampleToken } from '../typechain-types'
+import { BIdolNFT } from '../typechain-types'
 
 describe('Example', () => {
-	let example: ExampleToken
+	let idol: BIdolNFT
 	let snapshot: SnapshotRestorer
 	before(async () => {
-		const factory = await ethers.getContractFactory('ExampleToken')
-		example = (await factory.deploy()) as ExampleToken
-		await example.deployed()
-		await example.initialize()
+		const factory = await ethers.getContractFactory('BIdolNFT')
+		idol = (await factory.deploy()) as BIdolNFT
+		await idol.deployed()
+		await idol.initialize()
 	})
 	beforeEach(async () => {
 		snapshot = await takeSnapshot()
@@ -23,14 +23,14 @@ describe('Example', () => {
 	})
 	describe('name', () => {
 		it('check name', async () => {
-			const value = await example.name()
-			expect(value.toString()).to.equal('token')
+			const value = await idol.name()
+			expect(value.toString()).to.equal('B-idol')
 		})
 	})
 	describe('symbol', () => {
 		it('check symbol', async () => {
-			const symbol = await example.symbol()
-			expect(symbol.toString()).to.equal('TOKEN')
+			const symbol = await idol.symbol()
+			expect(symbol.toString()).to.equal('P-BIDOL')
 		})
 	})
 })
