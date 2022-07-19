@@ -61,38 +61,30 @@ contract BIdolNFT is
 		// 	bytes(baseURI).length != 0
 		// 		? string(abi.encodePacked(baseURI, _toString(tokenId)))
 		// 		: "";
-				string memory name = string(
-			abi.encodePacked(
-				"Project B-idol"
-			)
-		);
+		string memory name = string(abi.encodePacked("Project B-idol"));
 		string memory description = string(
 			abi.encodePacked(
 				// solhint-disable-next-line quotes
-				'Your support will create their future! \x20\x1CProject B-idol\x20\x1D, a new generation of Web3 digital idols by blockchain technology \x20\x1CProject B-idol\x20\x1D is a digital idol project being developed as NFT. The girls, who aim to become miraculous \x20\x1CSuper Idols\x20\x1D, will be active in the blockchain world!'
+				"Your support will create their future! \x20\x1CProject B-idol\x20\x1D, a new generation of Web3 digital idols by blockchain technology \x20\x1CProject B-idol\x20\x1D is a digital idol project being developed as NFT. The girls, who aim to become miraculous \x20\x1CSuper Idols\x20\x1D, will be active in the blockchain world!"
 			)
 		);
 		string memory image = string(
-				abi.encodePacked(
-					"https://hogehoge/",
-					tokenId,
-					".jpg"
-				)
-			);
+			abi.encodePacked("https://hogehoge/", tokenId, ".jpg")
+		);
 		return
 			string(
 				abi.encodePacked(
-							// solhint-disable-next-line quotes
-							'{"name":"',
-							name,
-							// solhint-disable-next-line quotes
-							'", "description":"',
-							description,
-							// solhint-disable-next-line quotes
-							'", "image": "',
-							image,
-							// solhint-disable-next-line quotes
-							'"}'
+					// solhint-disable-next-line quotes
+					'{"name":"',
+					name,
+					// solhint-disable-next-line quotes
+					'", "description":"',
+					description,
+					// solhint-disable-next-line quotes
+					'", "image": "',
+					image,
+					// solhint-disable-next-line quotes
+					'"}'
 				)
 			);
 	}
@@ -187,10 +179,10 @@ contract BIdolNFT is
 
 	function _authorizeUpgrade(address) internal override onlyOwner {}
 }
-	// 残 TODO
-	// 二時流通ロイヤリティのロジックを組み込む
-	// token uriの形式を確認する
-	// 単体テスト
-	// interfaceにコメント書く
-	// フロント担当者のために使い方まとめる(readme)
-	// openseaのテストネットで実験する
+// 残 TODO
+// 二時流通ロイヤリティのロジックを組み込む
+// token uriの形式を確認する
+// 単体テスト
+// interfaceにコメント書く
+// フロント担当者のために使い方まとめる(readme)
+// openseaのテストネットで実験する
