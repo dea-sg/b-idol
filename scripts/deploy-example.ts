@@ -3,7 +3,7 @@
 import { ethers, upgrades } from 'hardhat'
 
 async function main() {
-	const tokenFactory = await ethers.getContractFactory('ExampleToken')
+	const tokenFactory = await ethers.getContractFactory('BIdolNFT')
 	const token = await upgrades.deployProxy(tokenFactory, [], { kind: 'uups' })
 	await token.deployed()
 	console.log('proxy was deployed to:', token.address)

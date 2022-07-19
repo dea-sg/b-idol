@@ -58,6 +58,7 @@
 		"@openzeppelin/contracts-upgradeable": "4.7.0",
 		"erc721a": "^4.1.0",
 		"hardhat-gas-reporter": "^1.0.8",
+		"merkletreejs": "^0.2.32",
 		"solidity-coverage": "^0.7.21"
 	}
 }

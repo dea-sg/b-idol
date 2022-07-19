@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/interfaces/draft-IERC1822Upgradeable
 import "@openzeppelin/contracts-upgradeable/token/common/ERC2981Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "./azuki/ERC721AUpgradeable.sol";
 import "./interfaces/IBIdolNFT.sol";
 
@@ -19,6 +20,7 @@ contract BIdolNFT is
 {
 	using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 	using MerkleProofUpgradeable for bytes32[];
+	using StringsUpgradeable for uint256;
 	uint256 public price = 30000000000000000; // 0.03ether
 	uint256 public maxTokenCount = 5000;
 	uint256 public totalValue;
@@ -64,12 +66,11 @@ contract BIdolNFT is
 		string memory name = string(abi.encodePacked("Project B-idol"));
 		string memory description = string(
 			abi.encodePacked(
-				// solhint-disable-next-line quotes
-				"Your support will create their future! \x20\x1CProject B-idol\x20\x1D, a new generation of Web3 digital idols by blockchain technology \x20\x1CProject B-idol\x20\x1D is a digital idol project being developed as NFT. The girls, who aim to become miraculous \x20\x1CSuper Idols\x20\x1D, will be active in the blockchain world!"
+				"Your support will create their future! 'Project B-idol', a new generation of Web3 digital idols by blockchain technology 'Project B-idol' is a digital idol project being developed as NFT. The girls, who aim to become miraculous 'Super Idols', will be active in the blockchain world!"
 			)
 		);
 		string memory image = string(
-			abi.encodePacked("https://hogehoge/", tokenId, ".jpg")
+			abi.encodePacked("https://hogehoge/", tokenId.toString(), ".jpg")
 		);
 		return
 			string(
@@ -129,7 +130,7 @@ contract BIdolNFT is
 	}
 
 	function checkMaxTokenId() private view {
-		require(maxTokenCount > _totalMinted(), "over maximum token number ");
+		require(maxTokenCount >= _totalMinted(), "over maximum token number");
 	}
 
 	function setMaxTokenCount(uint256 _maxTokenCount) external onlyOwner {
@@ -183,6 +184,9 @@ contract BIdolNFT is
 // 二時流通ロイヤリティのロジックを組み込む
 // token uriの形式を確認する
 // 単体テスト
-// interfaceにコメント書く
 // フロント担当者のために使い方まとめる(readme)
 // openseaのテストネットで実験する
+// ホワイトリストのアドレスをもらう
+// ホワイトリストプルーフ作成スクリプトをかく
+// descriptionがシングルコーテーションでもいいか聞く
+// テストケースのわざわざbigNumberをparseしていたところを修正
