@@ -32,8 +32,10 @@ interface IBIdolNFT {
 
 	/**
 	 * @dev sales withdrawal
+	 *
+	 * - `_target` target address.
 	 */
-	function withdraw() external;
+	function withdraw(address payable _target) external;
 
 	/**
 	 * @dev burn
