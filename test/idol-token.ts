@@ -97,27 +97,32 @@ describe('BIdolNFT', () => {
 		})
 	})
 	describe('tokenURI', () => {
+		const checkTokenUri = (tokenUri: string, tokenId: number): void => {
+			const uriInfo = tokenUri.split(',')
+			expect(uriInfo.length).to.equal(2)
+			expect(uriInfo[0]).to.equal('data:application/json;base64')
+			const decodedData = Buffer.from(uriInfo[1], 'base64').toString()
+			const details = JSON.parse(decodedData) as {
+				name: string
+				description: string
+				image: string
+			}
+			const { name, description, image } = details
+			expect(name).to.equal('Project B-idol')
+			expect(description).to.equal(
+				"Your support will create their future! 'Project B-idol', a new generation of Web3 digital idols by blockchain technology 'Project B-idol' is a digital idol project being developed as NFT. The girls, who aim to become miraculous 'Super Idols', will be active in the blockchain world!"
+			)
+			expect(image).to.equal(`https://hogehoge/${tokenId}.jpg`)
+		}
+
 		beforeEach(async () => {
 			const tmp = Wallet.createRandom()
 			await idol.mintByOwner(tmp.address, 3)
 		})
 		describe('success', () => {
-			it('name', async () => {
+			it('details', async () => {
 				const uri = await idol.tokenURI(1)
-				const uriObj = JSON.parse(uri)
-				expect(uriObj.name).to.equal('Project B-idol')
-			})
-			it('description', async () => {
-				const uri = await idol.tokenURI(2)
-				const uriObj = JSON.parse(uri)
-				expect(uriObj.description).to.equal(
-					"Your support will create their future! 'Project B-idol', a new generation of Web3 digital idols by blockchain technology 'Project B-idol' is a digital idol project being developed as NFT. The girls, who aim to become miraculous 'Super Idols', will be active in the blockchain world!"
-				)
-			})
-			it('image', async () => {
-				const uri = await idol.tokenURI(0)
-				const uriObj = JSON.parse(uri)
-				expect(uriObj.image).to.equal('https://hogehoge/0.jpg')
+				checkTokenUri(uri, 1)
 			})
 		})
 		describe('fail', () => {
