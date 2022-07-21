@@ -58,7 +58,7 @@
 	},
 	"dependencies": {
 		"@devprotocol/util-contracts": "3.3.0",
-		"@openzeppelin/contracts": "4.7.0",
+		"@openzeppelin/contracts": "4.7.1",
 		"@openzeppelin/contracts-upgradeable": "4.7.0",
 		"erc721a": "4.1.0"
 	}
