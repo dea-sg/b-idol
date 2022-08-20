@@ -424,6 +424,45 @@ describe('BIdolNFT', () => {
 		})
 	})
 
+	describe('ownerOf', () => {
+		it('many mint', async () => {
+			const user = Wallet.createRandom()
+			await idol.mintByOwner(user.address, 100)
+			const ownnerOf0 = await idol.ownerOf(0)
+			const ownnerOf1 = await idol.ownerOf(1)
+			const ownnerOf50 = await idol.ownerOf(50)
+			const ownnerOf98 = await idol.ownerOf(98)
+			const ownnerOf99 = await idol.ownerOf(99)
+			const addressSet = new Set([
+				ownnerOf0,
+				ownnerOf1,
+				ownnerOf50,
+				ownnerOf98,
+				ownnerOf99,
+			])
+			expect(addressSet.size).to.deep.equal(1)
+			expect(addressSet.has(user.address)).to.deep.equal(true)
+		})
+		it('many mint and transfer', async () => {
+			const account = await ethers.getSigners()
+			const user = Wallet.createRandom()
+			await idol.mintByOwner(account[7].address, 100)
+			await idol
+				.connect(account[7])
+				.transferFrom(account[7].address, user.address, 3)
+			const ownnerOf0 = await idol.ownerOf(0)
+			const ownnerOf2 = await idol.ownerOf(2)
+			const ownnerOf3 = await idol.ownerOf(3)
+			const ownnerOf4 = await idol.ownerOf(4)
+			const ownnerOf99 = await idol.ownerOf(99)
+			expect(ownnerOf0).to.deep.equal(account[7].address)
+			expect(ownnerOf2).to.deep.equal(account[7].address)
+			expect(ownnerOf3).to.deep.equal(user.address)
+			expect(ownnerOf4).to.deep.equal(account[7].address)
+			expect(ownnerOf99).to.deep.equal(account[7].address)
+		})
+	})
+
 	describe('getOwners', () => {
 		it('not mint', async () => {
 			const owners = await idol.getOwners()
