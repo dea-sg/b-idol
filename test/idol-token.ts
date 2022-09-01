@@ -1,12 +1,10 @@
 import { expect } from 'chai'
 import { ethers } from 'hardhat'
 import { Wallet } from 'ethers'
-import {
-	takeSnapshot,
-	SnapshotRestorer,
-} from '@nomicfoundation/hardhat-network-helpers'
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
-import { BIdolNFT, SupportInterfaceTest } from '../typechain-types'
+import type { SnapshotRestorer } from '@nomicfoundation/hardhat-network-helpers'
+import { takeSnapshot } from '@nomicfoundation/hardhat-network-helpers'
+import type { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
+import type { BIdolNFT, SupportInterfaceTest } from '../typechain-types'
 import { MerkleTree } from 'merkletreejs'
 
 describe('BIdolNFT', () => {
@@ -62,6 +60,12 @@ describe('BIdolNFT', () => {
 			expect(symbol.toString()).to.equal('P-BIDOL')
 		})
 	})
+	describe('licenseVersion', () => {
+		it('check license version', async () => {
+			const licence = await idol.licenseVersion()
+			expect(licence.toString()).to.equal('0')
+		})
+	})
 	describe('supportsInterface', () => {
 		let interfaceIdTest: SupportInterfaceTest
 		beforeEach(async () => {
@@ -87,6 +91,11 @@ describe('BIdolNFT', () => {
 			it('ERC1822ProxiableUpgradeable', async () => {
 				const interfaceId =
 					await interfaceIdTest.getERC1822ProxiableUpgradeableId()
+				const result = await idol.supportsInterface(interfaceId)
+				expect(result).to.equal(true)
+			})
+			it('CantBeEvilUpgradable', async () => {
+				const interfaceId = await interfaceIdTest.getCantBeEvilUpgradableId()
 				const result = await idol.supportsInterface(interfaceId)
 				expect(result).to.equal(true)
 			})
@@ -424,6 +433,45 @@ describe('BIdolNFT', () => {
 		})
 	})
 
+	describe('ownerOf', () => {
+		it('many mint', async () => {
+			const user = Wallet.createRandom()
+			await idol.mintByOwner(user.address, 100)
+			const ownnerOf0 = await idol.ownerOf(0)
+			const ownnerOf1 = await idol.ownerOf(1)
+			const ownnerOf50 = await idol.ownerOf(50)
+			const ownnerOf98 = await idol.ownerOf(98)
+			const ownnerOf99 = await idol.ownerOf(99)
+			const addressSet = new Set([
+				ownnerOf0,
+				ownnerOf1,
+				ownnerOf50,
+				ownnerOf98,
+				ownnerOf99,
+			])
+			expect(addressSet.size).to.deep.equal(1)
+			expect(addressSet.has(user.address)).to.deep.equal(true)
+		})
+		it('many mint and transfer', async () => {
+			const account = await ethers.getSigners()
+			const user = Wallet.createRandom()
+			await idol.mintByOwner(account[7].address, 100)
+			await idol
+				.connect(account[7])
+				.transferFrom(account[7].address, user.address, 3)
+			const ownnerOf0 = await idol.ownerOf(0)
+			const ownnerOf2 = await idol.ownerOf(2)
+			const ownnerOf3 = await idol.ownerOf(3)
+			const ownnerOf4 = await idol.ownerOf(4)
+			const ownnerOf99 = await idol.ownerOf(99)
+			expect(ownnerOf0).to.deep.equal(account[7].address)
+			expect(ownnerOf2).to.deep.equal(account[7].address)
+			expect(ownnerOf3).to.deep.equal(user.address)
+			expect(ownnerOf4).to.deep.equal(account[7].address)
+			expect(ownnerOf99).to.deep.equal(account[7].address)
+		})
+	})
+
 	describe('getOwners', () => {
 		it('not mint', async () => {
 			const owners = await idol.getOwners()
@@ -514,6 +562,20 @@ describe('BIdolNFT', () => {
 					'TransferCallerNotOwnerNorApproved'
 				)
 			})
+		})
+	})
+
+	describe('getLicenseURI', () => {
+		it('get License URI', async () => {
+			const uri = await idol.getLicenseURI()
+			expect(uri).to.equal('ar://_D9kN1WrNWbCq55BSAGRbTB4bS3v8QAPTYmBThSbX3A/0')
+		})
+	})
+
+	describe('getLicenseName', () => {
+		it('get License Name', async () => {
+			const uri = await idol.getLicenseName()
+			expect(uri).to.equal('CBE_CC0')
 		})
 	})
 })
