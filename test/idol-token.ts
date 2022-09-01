@@ -1,12 +1,10 @@
 import { expect } from 'chai'
 import { ethers } from 'hardhat'
 import { Wallet } from 'ethers'
-import {
-	takeSnapshot,
-	SnapshotRestorer,
-} from '@nomicfoundation/hardhat-network-helpers'
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
-import { BIdolNFT, SupportInterfaceTest } from '../typechain-types'
+import type { SnapshotRestorer } from '@nomicfoundation/hardhat-network-helpers'
+import { takeSnapshot } from '@nomicfoundation/hardhat-network-helpers'
+import type { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
+import type { BIdolNFT, SupportInterfaceTest } from '../typechain-types'
 import { MerkleTree } from 'merkletreejs'
 
 describe('BIdolNFT', () => {
@@ -62,6 +60,12 @@ describe('BIdolNFT', () => {
 			expect(symbol.toString()).to.equal('P-BIDOL')
 		})
 	})
+	describe('licenseVersion', () => {
+		it('check license version', async () => {
+			const licence = await idol.licenseVersion()
+			expect(licence.toString()).to.equal('0')
+		})
+	})
 	describe('supportsInterface', () => {
 		let interfaceIdTest: SupportInterfaceTest
 		beforeEach(async () => {
@@ -87,6 +91,11 @@ describe('BIdolNFT', () => {
 			it('ERC1822ProxiableUpgradeable', async () => {
 				const interfaceId =
 					await interfaceIdTest.getERC1822ProxiableUpgradeableId()
+				const result = await idol.supportsInterface(interfaceId)
+				expect(result).to.equal(true)
+			})
+			it('CantBeEvilUpgradable', async () => {
+				const interfaceId = await interfaceIdTest.getCantBeEvilUpgradableId()
 				const result = await idol.supportsInterface(interfaceId)
 				expect(result).to.equal(true)
 			})
@@ -553,6 +562,20 @@ describe('BIdolNFT', () => {
 					'TransferCallerNotOwnerNorApproved'
 				)
 			})
+		})
+	})
+
+	describe('getLicenseURI', () => {
+		it('get License URI', async () => {
+			const uri = await idol.getLicenseURI()
+			expect(uri).to.equal('ar://_D9kN1WrNWbCq55BSAGRbTB4bS3v8QAPTYmBThSbX3A/0')
+		})
+	})
+
+	describe('getLicenseName', () => {
+		it('get License Name', async () => {
+			const uri = await idol.getLicenseName()
+			expect(uri).to.equal('CBE_CC0')
 		})
 	})
 })

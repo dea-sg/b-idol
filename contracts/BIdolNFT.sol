@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity =0.8.9;
+pragma solidity =0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
@@ -11,6 +11,7 @@ import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 import "@devprotocol/util-contracts/contracts/utils/Base64.sol";
 import "./azuki/ERC721AUpgradeable.sol";
+import "./a16z/CantBeEvilUpgradable.sol";
 import "./interfaces/IBIdolNFT.sol";
 
 contract BIdolNFT is
@@ -18,6 +19,7 @@ contract BIdolNFT is
 	UUPSUpgradeable,
 	ERC721AUpgradeable,
 	ERC2981Upgradeable,
+	CantBeEvilUpgradable,
 	IBIdolNFT
 {
 	using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
@@ -36,6 +38,7 @@ contract BIdolNFT is
 		__UUPSUpgradeable_init();
 		__ERC721A_init("B-idol", "P-BIDOL");
 		__ERC2981_init();
+		__CantBeEvil_init(LicenseVersion.CBE_CC0);
 		price = 30000000000000000; // 0.03ether
 		maxTokenCount = 5000;
 		isPublicSale = false;
@@ -46,14 +49,15 @@ contract BIdolNFT is
 		public
 		view
 		virtual
-		override(ERC2981Upgradeable, ERC721AUpgradeable)
+		override(ERC2981Upgradeable, ERC721AUpgradeable, CantBeEvilUpgradable)
 		returns (bool)
 	{
 		return
 			_interfaceId == type(IBIdolNFT).interfaceId ||
 			_interfaceId == type(IERC1822ProxiableUpgradeable).interfaceId ||
 			ERC2981Upgradeable.supportsInterface(_interfaceId) ||
-			ERC721AUpgradeable.supportsInterface(_interfaceId);
+			ERC721AUpgradeable.supportsInterface(_interfaceId) ||
+			CantBeEvilUpgradable.supportsInterface(_interfaceId);
 	}
 
 	function tokenURI(uint256 tokenId)

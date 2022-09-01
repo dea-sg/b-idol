@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@a16z/contracts@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@a16z/contracts/-/contracts-0.0.8.tgz#91da2191c18432fffb148e3f2bd9e5579fd56f0f"
+  integrity sha512-jG+sZxH/xFQw8PFjLcNOZVUd2IKzAExfV3AH8uaxxG01BAyvSrOKhlEYDUK9j/eqJ4Mqwt+FWlcdxvD3DRmHyQ==
+  dependencies:
+    "@openzeppelin/contracts" "^4.7.2"
+
 "@babel/code-frame@^7.0.0":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
@@ -791,7 +798,7 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.3.0.tgz#345236d4ec73ef381ab4907c6ef66fd55e5dedad"
   integrity sha512-+uBDl/TrmR0Kch6mq3tuxMex/fK7huR6+fQMae+zJk1K5T+dp0pFl12Hbc+1L6oYMXoyDSBJ8zqhRIntrREDFA==
 
-"@openzeppelin/contracts@4.7.3":
+"@openzeppelin/contracts@^4.7.2":
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.7.3.tgz#939534757a81f8d69cc854c7692805684ff3111e"
   integrity sha512-dGRS0agJzu8ybo44pCIf3xBaPQN/65AIXNgK8+4gzKd5kbvlqyxryUYVLJv7fK98Seyd2hDZzVEHSWAh0Bt1Yw==

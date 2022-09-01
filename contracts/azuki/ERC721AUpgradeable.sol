@@ -7,10 +7,10 @@
 /* solhint-disable quotes */
 /* solhint-disable reason-string */
 
-pragma solidity =0.8.9;
+pragma solidity =0.8.16;
 
-import "./IERC721AUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "erc721a/contracts/IERC721A.sol";
 
 /**
  * @dev ERC721 token receiver interface.
@@ -35,7 +35,7 @@ interface ERC721A__IERC721Receiver {
  *
  * Assumes that the maximum token id cannot exceed 2**256 - 1 (max value of uint256).
  */
-contract ERC721AUpgradeable is Initializable, IERC721AUpgradeable {
+contract ERC721AUpgradeable is Initializable, IERC721A {
 	// Mask of an entry in packed address data.
 	uint256 private constant BITMASK_ADDRESS_DATA_ENTRY = (1 << 64) - 1;
 
