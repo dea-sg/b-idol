@@ -46,7 +46,7 @@
 		"hardhat": "2.12.0",
 		"hardhat-gas-reporter": "1.0.9",
 		"husky": "8.0.1",
-		"merkletreejs": "0.2.32",
+		"merkletreejs": "0.3.0",
 		"mocha": "10.1.0",
 		"prettier": "2.7.1",
 		"prettier-plugin-solidity": "1.0.0-dev.24",
