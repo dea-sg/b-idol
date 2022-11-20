@@ -4348,10 +4348,10 @@ merge2@^1.2.3, merge2@^1.3.0, merge2@^1.4.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
-merkletreejs@0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/merkletreejs/-/merkletreejs-0.3.7.tgz#e98920f2f92c0725c11e5281822094f48184aa12"
-  integrity sha512-eD1VAwHdTgYZtSqqGwgj+6Ai3lev+C+vtSvItCauS0E24Pgu5tYVNN80ddV02TMmkg3BtvNXDXkPoIG5bBDYoA==
+merkletreejs@0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/merkletreejs/-/merkletreejs-0.3.8.tgz#2897b45484095db78635149bcdc95bab5f36a5a8"
+  integrity sha512-HrCabyH/xj6T12q3ij0Quitu1+QBwLftz3NxZNrRC/5cdiMeM6UIi3JElVYc1hjpgTOlDxLWrxGGIDsC+gPqhg==
   dependencies:
     bignumber.js "^9.0.1"
     buffer-reverse "^1.0.1"
