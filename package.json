@@ -44,7 +44,7 @@
 		"eslint-config-xo-typescript": "1.0.1",
 		"ethers": "5.7.2",
 		"hardhat": "2.19.2",
-		"hardhat-gas-reporter": "1.0.9",
+		"hardhat-gas-reporter": "1.0.10",
 		"husky": "8.0.3",
 		"merkletreejs": "0.3.11",
 		"mocha": "10.2.0",
