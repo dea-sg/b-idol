@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@a16z/contracts@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@a16z/contracts/-/contracts-0.0.8.tgz#91da2191c18432fffb148e3f2bd9e5579fd56f0f"
-  integrity sha512-jG+sZxH/xFQw8PFjLcNOZVUd2IKzAExfV3AH8uaxxG01BAyvSrOKhlEYDUK9j/eqJ4Mqwt+FWlcdxvD3DRmHyQ==
+"@a16z/contracts@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@a16z/contracts/-/contracts-0.0.9.tgz#e39cefa8ddbc272c29190d53a57eda2619a27fc4"
+  integrity sha512-Aj0oov1iLSPE4n6zAknQ6zoLniXazlcYlTwKPymEoyT3cQKbFaRnWE9EcVmYjASLTAzpWL3rnJkNmbYpIIwTlA==
   dependencies:
     "@openzeppelin/contracts" "^4.7.2"
 
