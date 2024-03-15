@@ -57,7 +57,7 @@
 		"typescript": "5.3.3"
 	},
 	"dependencies": {
-		"@a16z/contracts": "0.0.8",
+		"@a16z/contracts": "0.0.9",
 		"erc721a": "4.2.2",
 		"@devprotocol/util-contracts": "3.3.0",
 		"@openzeppelin/contracts-upgradeable": "4.9.6"
