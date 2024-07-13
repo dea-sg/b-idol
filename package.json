@@ -48,7 +48,7 @@
 		"husky": "8.0.3",
 		"merkletreejs": "0.3.11",
 		"mocha": "10.2.0",
-		"prettier": "2.8.8",
+		"prettier": "3.3.3",
 		"prettier-plugin-solidity": "1.2.0",
 		"solhint": "3.4.1",
 		"solidity-coverage": "0.8.11",
